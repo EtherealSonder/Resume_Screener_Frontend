@@ -8,22 +8,22 @@ def upload_and_score():
     
 
     job_title = st.selectbox("Job Title", [
-    "Frontend Developer",
-    "Full Stack Developer",
-    "Machine Learning Engineer",
-    "DevOps Engineer",
-    "AI Research Intern",
-    "Game Designer",
-    "Unity Technical Artist",
-    "Unreal Engine Developer",
-    "Cloud Engineer (AWS/GCP)",
-    "Mobile App Developer",
-    "Computer Vision Engineer",
-    "NLP Engineer",
-    "QA Automation Engineer",
-    "Business Intelligence Analyst",
-    "Web Developer"
-])
+                                            "Frontend Developer",
+                                            "Full Stack Developer",
+                                            "Machine Learning Engineer",
+                                            "DevOps Engineer",
+                                            "AI Research Intern",
+                                            "Game Designer",
+                                            "Unity Technical Artist",
+                                            "Unreal Engine Developer",
+                                            "Cloud Engineer (AWS/GCP)",
+                                            "Mobile App Developer",
+                                            "Computer Vision Engineer",
+                                            "NLP Engineer",
+                                            "QA Automation Engineer",
+                                            "Business Intelligence Analyst",
+                                            "Web Developer"
+                                           ])
 
     resume_file = st.file_uploader("Upload Resume (PDF)")
     cover_letter = st.text_area("Optional Cover Letter", height=200)
