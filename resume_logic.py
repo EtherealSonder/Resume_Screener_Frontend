@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import streamlit as st
 import pandas as pd
 from db import get_connection
