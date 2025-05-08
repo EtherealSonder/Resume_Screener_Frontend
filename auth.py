@@ -15,6 +15,7 @@ def login():
         if response.status_code == 200:
             st.session_state.client = response.json()
             st.success(f"Welcome {st.session_state.client['name']}")
-            st.experimental_rerun()
+            st.rerun()
+
         else:
             st.error("Login failed. Try a valid email.")
