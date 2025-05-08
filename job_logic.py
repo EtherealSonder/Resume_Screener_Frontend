@@ -11,8 +11,8 @@ def create_job():
         with get_connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("""
-                    INSERT INTO jobs (job_title, job_description, location)
+                    INSERT INTO jobs (job_title, job_description, client_id)
                     VALUES (%s, %s, %s)
-                """, (title, description, location))
+                """, (title, description,st.session_state.client["id"]))
                 conn.commit()
         st.success("Job created successfully!")

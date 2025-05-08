@@ -52,12 +52,14 @@ def upload_and_score():
 
 def view_candidates():
     st.header("Top Candidates")
+    client_id = st.session_state.client["id"]
 
     with get_connection() as conn:
         df = pd.read_sql("""
             SELECT j.job_title, r.candidate_name, r.email, r.score, r.summary
             FROM resumes r
             JOIN jobs j ON r.job_id = j.id
+            WHERE j.client_id = %s             
             ORDER BY r.score DESC
             LIMIT 10
         """, conn)
