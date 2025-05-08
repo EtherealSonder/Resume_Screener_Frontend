@@ -5,9 +5,29 @@ import requests
 
 def upload_and_score():
     st.header("Upload Resume for Scoring")
-    job_title = st.text_input("Job Title")
+    
+
+    job_title = st.selectbox("Job Title", [
+    "Frontend Developer",
+    "Full Stack Developer",
+    "Machine Learning Engineer",
+    "DevOps Engineer",
+    "AI Research Intern",
+    "Game Designer",
+    "Unity Technical Artist",
+    "Unreal Engine Developer",
+    "Cloud Engineer (AWS/GCP)",
+    "Mobile App Developer",
+    "Computer Vision Engineer",
+    "NLP Engineer",
+    "QA Automation Engineer",
+    "Business Intelligence Analyst",
+    "Web Developer"
+])
+
     resume_file = st.file_uploader("Upload Resume (PDF)")
-    cover_letter = st.text_area("Optional Cover Letter")
+    cover_letter = st.text_area("Optional Cover Letter", height=200)
+
 
     if st.button("Evaluate") and resume_file and job_title:
         with st.spinner("Evaluating..."):
@@ -16,6 +36,8 @@ def upload_and_score():
                 files={"resume": resume_file},
                 data={"job_title": job_title, "cover_letter": cover_letter}
             )
+            print("API response:", response.status_code, response.text)
+
             if response.status_code == 200:
                 result = response.json()
                 st.success(f"Score: {result['score']}")
