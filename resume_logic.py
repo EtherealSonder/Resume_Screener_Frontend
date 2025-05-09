@@ -9,6 +9,7 @@ import requests
 def upload_and_score():
     st.header("Upload Resume for Scoring")
     
+    client_id = st.session_state.client["id"]
 
     job_title = st.selectbox("Job Title", [
                                             "Frontend Developer",
@@ -37,7 +38,7 @@ def upload_and_score():
             response = requests.post(
                 "http://localhost:5000/parse_resume",
                 files={"resume": resume_file},
-                data={"job_title": job_title, "cover_letter": cover_letter}
+                data={"job_title": job_title, "cover_letter": cover_letter, "client_id": client_id }
             )
             print("API response:", response.status_code, response.text)
 
@@ -59,10 +60,10 @@ def view_candidates():
             SELECT j.job_title, r.candidate_name, r.email, r.score, r.summary
             FROM resumes r
             JOIN jobs j ON r.job_id = j.id
-            WHERE j.client_id = %s             
+            WHERE j.client_id = %(client_id)s             
             ORDER BY r.score DESC
             LIMIT 10
-        """, conn)
+        """, conn, params={"client_id": client_id})
 
     st.dataframe(df)
 
